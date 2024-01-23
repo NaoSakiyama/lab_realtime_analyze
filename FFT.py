@@ -24,11 +24,13 @@ while True:
     # 逆フーリエ変換
     f_transform_inverse = np.fft.ifftshift(f_transform_shifted)
     img_back = np.fft.ifft2(f_transform_inverse)
-    img_back = np.abs(img_back)
+    img_amplitude = np.abs(img_back)
+    img_phase = np.angle(img_back)
     
     # 結果の表示
     cv2.imshow('Original', frame)
-    cv2.imshow('Filtered', np.uint8(img_back))
+    cv2.imshow('Reconstruction_amp', np.uint8(img_amplitude))
+    cv2.imshow('Reconstruction_phase', np.uint8(img_phase))
     
     k = cv2.waitKey(5) & 0xFF
     if k == 27:

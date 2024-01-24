@@ -17,7 +17,7 @@ while True:
     # 物体光成分の抽出
     rows, cols = gray.shape
     crow, ccol = 60 ,193
-    cropped_width, cropped_height = 50, 50
+    cropped_width, cropped_height = 30, 30
     mask = np.zeros((rows, cols))
     f_transform_shifted[rows//2-cropped_height:rows//2+cropped_height, cols//2 -cropped_width:cols//2+cropped_width] = f_transform_shifted[crow-cropped_height:crow+cropped_height, ccol-cropped_width:ccol+cropped_height]
     
@@ -25,10 +25,7 @@ while True:
     f_transform_shifted[rows//2+cropped_height:] = 0
     f_transform_shifted[:,:cols//2-cropped_width] = 0
     f_transform_shifted[:,cols//2+cropped_width:] = 0
-    
-    plt.imshow(np.abs(np.log(1+f_transform_shifted)), cmap = 'gray')
-    plt.title('cropped_shift')
-    plt.show()
+
     # 逆フーリエ変換
     f_transform_inverse = np.fft.ifftshift(f_transform_shifted)
     img_back = np.fft.ifft2(f_transform_inverse)
